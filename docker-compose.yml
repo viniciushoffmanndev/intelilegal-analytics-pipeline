@@ -9,6 +9,8 @@ services:
       - .:/app
     environment:
       - ENVIRONMENT=dev
+    env_file:
+      - .env
     # Mantém o terminal interativo aberto
     tty: true
     stdin_open: true
