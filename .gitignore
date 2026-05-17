@@ -18,11 +18,12 @@ override.tf.json
 derby.log
 metastore_db/
 spark-warehouse/
-data/
-datasets/
-*.csv
-*.parquet
-*.jsonl
+.pyspark/
+*.crc
+# Ignora todo o conteúdo da pasta data (incluindo os Parquets pesados)...
+data/*
+# ...EXCETO a nossa massa de testes JSON para o time conseguir rodar o projeto
+!data/raw_contracts.json
 
 # AI & Vector Databases (ChromaDB, FAISS, Vector Storage)
 .chroma/
@@ -34,3 +35,7 @@ logs/
 .idea/
 .vscode/
 *.swp
+
+# Virtual Environments (Python, Node, etc.)
+venv/
+.venv/
