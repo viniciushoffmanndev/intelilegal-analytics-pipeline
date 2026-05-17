@@ -1,0 +1,16 @@
+# Big Data & Core Processing
+pyspark==3.5.1
+
+# AI & Vector Databases (Próximas etapas)
+langchain==0.3.0
+langchain-community==0.3.0
+chromadb==0.5.5
+openai==1.14.1
+
+# Backend API
+fastapi==0.110.0
+uvicorn[standard]==0.28.0
+
+# Code Quality (DevSecOps / MLOps)
+black==24.2.0
+ruff==0.3.2
