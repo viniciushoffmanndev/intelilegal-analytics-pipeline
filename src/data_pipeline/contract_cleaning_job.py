@@ -1,5 +1,3 @@
-# O motor do PySpark
-
 import os
 import re
 from pyspark.sql import SparkSession
@@ -57,8 +55,8 @@ class LegalDataPipeline:
         """
         print(f"[*] Iniciando leitura dos dados brutos de: {input_path}")
         
-        # 1. Ingestão (Extract) - Simulando leitura do Data Lake
-        raw_df = self.spark.read.option("multiline", "true").json(input_path)
+        # 1. Ingestão (Extract) - Ajustado para ler formato JSON Lines padrão
+        raw_df = self.spark.read.json(input_path)
 
         # 2. Transformação (Transform) - Otimização e Profiling de Dados
         processed_df = raw_df \
@@ -69,7 +67,11 @@ class LegalDataPipeline:
                                      .otherwise("LOW")) \
             .select("contract_id", "agency_name", "estimated_value", "risk_level", "cleaned_content")
 
-        print("[*] Transformações aplicadas com sucesso. Esquema resultante:")
+        print("[*] Transformações aplicadas. Forçando exibição dos dados (.show()):")
+        # Exibe os dados estruturados no terminal (Ação do Spark)
+        processed_df.show(truncate=40)
+
+        print("[*] Esquema final do Data Lakehouse:")
         processed_df.printSchema()
 
         # 3. Escrita (Load) - Salvando em Parquet colunar de alta performance
@@ -87,5 +89,6 @@ if __name__ == "__main__":
 
     # Executa a arquitetura do job
     pipeline = LegalDataPipeline()
-    # Nota: Em produção, este método receberia caminhos do S3 provisionados pelo Terraform
-    # pipeline.run_pipeline("s3://...", "s3://...")
+    
+    # CORREÇÃO: Ativando a chamada do método com os caminhos locais de teste
+    pipeline.run_pipeline(INPUT_DATA, OUTPUT_DATA)
