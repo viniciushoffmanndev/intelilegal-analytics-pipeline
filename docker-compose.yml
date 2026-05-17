@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  analytics-app:
+    build: .
+    container_name: intelilegal_analytics_container
+    volumes:
+      # Mapeia seu código local para dentro do container em tempo real (Live Reload)
+      - .:/app
+    environment:
+      - ENVIRONMENT=dev
+    # Mantém o terminal interativo aberto
+    tty: true
+    stdin_open: true
