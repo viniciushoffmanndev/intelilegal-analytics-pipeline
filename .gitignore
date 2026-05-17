@@ -39,3 +39,6 @@ logs/
 # Virtual Environments (Python, Node, etc.)
 venv/
 .venv/
+
+# Environment Variables (Never commit sensitive info)
+.env
