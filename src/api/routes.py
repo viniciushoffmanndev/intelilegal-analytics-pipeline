@@ -2,20 +2,25 @@
 # o FastAPI vai usar os mesmos embeddings da OpenAI para buscar na base .chroma e devolver o JSON estruturado.
 
 import os
+import chromadb  # Import extra para garantir estabilidade do cliente no Docker
 from fastapi import APIRouter, HTTPException, status
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma  # Nova importação atualizada
 from src.api.schemas import SearchRequest, SearchResponse, SearchResultItem
 
 router = APIRouter()
 
 # Inicializa os Embeddings e a conexão com o ChromaDB no escopo global
-# para reaproveitar a instância entre as requisições (Singleton-like pattern)
 try:
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+    
+    # Opcional, mas altamente recomendado para Docker: cria um cliente persistente estável
+    persist_dir = ".chroma"
+    persistent_client = chromadb.PersistentClient(path=persist_dir)
+    
     vector_db = Chroma(
-        persist_directory=".chroma",
-        embedding_function=embeddings
+        client=persistent_client,
+        embedding_function=embeddings  # O langchain-chroma aceita 'embedding_function' via wrapper, mas injetar o client é mais seguro
     )
 except Exception as e:
     print(f"[-] Erro ao conectar com a base vetorial Chroma: {str(e)}")
