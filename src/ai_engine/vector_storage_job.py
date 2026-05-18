@@ -2,9 +2,10 @@
 
 import os
 import glob
+import chromadb  # Importado para garantir estabilidade do cliente no Docker
 from langchain_community.document_loaders import PySparkDataFrameLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma  # Nova importação atualizada
 from langchain_openai import OpenAIEmbeddings
 from pyspark.sql import SparkSession
 
@@ -55,12 +56,17 @@ class VectorStorageJob:
             # Instancia o gerador oficial da OpenAI (consome da OPENAI_API_KEY do ambiente)
             embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
             
-            # Cria/atualiza a coleção persistente no diretório configurado (.chroma/)
-            vector_db = Chroma.from_documents(
-                documents=chunks,
-                embedding=embeddings,
-                persist_directory=self.db_path
+            # Cria o cliente persistente nativo idêntico ao da API
+            persistent_client = chromadb.PersistentClient(path=self.db_path)
+            
+            # Inicializa o banco vetorial acoplado ao cliente estável
+            vector_db = Chroma(
+                client=persistent_client,
+                embedding_function=embeddings
             )
+            
+            # Adiciona os documentos em lote na coleção
+            vector_db.add_documents(documents=chunks)
             print(f"[+] Sucesso! Banco vetorial persistido e indexado via OpenAI em: {self.db_path}")
             
         except Exception as e:
