@@ -36,6 +36,12 @@ logs/
 .vscode/
 *.swp
 
+# Python Cache & Compiled Files (Prevents dirty commits from execution)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
 # Virtual Environments (Python, Node, etc.)
 venv/
 .venv/
