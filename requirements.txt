@@ -1,11 +1,11 @@
 # Big Data & Core Processing
 pyspark==3.5.1
 
-# AI & Vector Databases (Próximas etapas)
+# AI & Vector Databases
 langchain==0.3.0
 langchain-community==0.3.0
 langchain-openai==0.3.7
-chromadb==0.5.5
+langchain-chroma>=0.1.2
 openai==1.58.1
 
 # Backend API
