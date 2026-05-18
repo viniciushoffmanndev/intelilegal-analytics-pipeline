@@ -4,6 +4,7 @@ services:
   analytics-app:
     build: .
     container_name: intelilegal_analytics_container
+    command: uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       # Mapeia seu código local para dentro do container em tempo real (Live Reload)
       - .:/app
