@@ -32,15 +32,15 @@
 
 <table align="center">
   <tr>
-    <td colspan="2"><img src="./public/001.PNG" width="100%"/></td>
+    <td colspan="2"><img src="./public/001.png" width="100%"/></td>
   </tr>
   <tr>
-    <td><img src="./public/002.PNG" width="100%"/></td>
-    <td><img src="./public/003.PNG" width="100%"/></td>
+    <td><img src="./public/002.png" width="100%"/></td>
+    <td><img src="./public/003.png" width="100%"/></td>
   </tr>
   <tr>
-    <td><img src="./public/005.PNG" width="100%"/></td>
-    <td><img src="./public/004.PNG" width="100%"/></td>
+    <td><img src="./public/005.png" width="100%"/></td>
+    <td><img src="./public/004.png" width="100%"/></td>
   </tr>
 </table>
 
