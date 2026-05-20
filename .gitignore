@@ -48,3 +48,4 @@ venv/
 
 # Environment Variables (Never commit sensitive info)
 .env
+**/.streamlit/secrets.toml
