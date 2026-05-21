@@ -49,3 +49,6 @@ venv/
 # Environment Variables (Never commit sensitive info)
 .env
 **/.streamlit/secrets.toml
+
+# Scripts utilitários locais
+upload_s3.py
