@@ -1,6 +1,9 @@
 # Big Data & Core Processing
 pyspark==3.5.1
 
+# Cloud Storage & AWS Integration
+boto3==1.43.12
+
 # AI & Vector Databases
 langchain==0.3.0
 langchain-community==0.3.0
