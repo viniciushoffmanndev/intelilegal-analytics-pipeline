@@ -1,4 +1,5 @@
 streamlit
+chromadb
 pandas
 boto3
 openai==1.58.1
